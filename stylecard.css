@@ -1,0 +1,94 @@
+/* stylecard.css */
+
+body {
+    background-image: url('backgroundcard.jpg');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .page-title {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fffdfd;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-grid {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .card {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    background: #ccc;
+    cursor: pointer;
+  }
+  
+  .select-button {
+    position: relative; /* tambah ini */
+    z-index: 3;          /* tambah ini supaya lebih tinggi dari background */
+    margin-top: 5px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+  
+  .card-category {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(253, 253, 253, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 2;
+  }
+  
+  /* Hover effects */
+  .card:hover .card-background {
+    transform: scale(1.15) translateZ(0);
+    background-size: 300px;
+  }
+  
+  .card-grid:hover > .card:not(:hover) {
+    transform: scale(0.9);
+  }
+  
+  .card-grid:hover > .card:not(:hover) .card-background,
+  .card-grid:hover > .card:not(:hover) .card-category {
+    filter: brightness(0.5) saturate(8) contrast(1.2) blur(2px);
+  }
+  

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Hover Effect</title>
+  <link rel="stylesheet" href="stylecard.css">
+  <style>
+    
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .card-grid {
+      display: flex;
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      width: 200px;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      background: #ccc;
+      cursor: pointer;
+    }
+
+    .card-background {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .card-category {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(253, 253, 253, 0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    /* Hover effects */
+    .card:hover .card-background {
+      transform: scale(1.15) translateZ(0);
+      background-size: 300px;
+    }
+
+    .card-grid:hover > .card:not(:hover) {
+      transform: scale(0.9);
+    }
+
+    .card-grid:hover > .card:not(:hover) .card-background,
+    .card-grid:hover > .card:not(:hover) .card-category {
+      filter: brightness(0.5) saturate(8) contrast(1.2) blur(2px);
+    }
+  </style>
+</head>
+<body>
+    <h1 class="page-title">Pilih Kartu Materi Sejarah</h1>
+    
+<div class="card-grid">
+  <div class="card">
+    <div class="card-background" style="background-image: url(bpupki.jpg);"></div>
+    <div class="card-category">BPUPKI</div>
+    <button class="select-button" onclick="selectCard('p1.html')">Pilih</button>
+  </div>
+  <div class="card">
+    <div class="card-background" style="background-image: url(panitia9.jpg);"></div>
+    <div class="card-category">Panitia 9</div>
+    <button class="select-button" onclick="selectCard('p2.html')">Pilih</button>
+  </div>
+  <div class="card">
+    <div class="card-background" style="background-image: url(ppki.png);"></div>
+    <div class="card-category">PPKI</div>
+    <button class="select-button" onclick="selectCard('p3.html')">Pilih</button>
+  </div>
+</div>
+<script>
+  function selectCard(page) {
+    window.location.href = page; // Ganti dengan URL game Anda 
+  }
+      </script>
+</body>
+</html>

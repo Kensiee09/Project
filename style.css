@@ -1,0 +1,49 @@
+/* Style untuk seluruh halaman */
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url(backgroundmenu.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Container menu */
+  .menu {
+    background: rgba(39, 34, 34, 0.1);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1px);
+    text-align: center;
+  }
+  
+  /* Judul menu */
+  .menu h1 {
+    color: #fefefe;
+    margin-bottom: 30px;
+    font-size: 3rem;
+  }
+  
+  /* Tombol menu */
+  .menu button {
+    display: block;
+    width: 220px;
+    margin: 15px auto;
+    padding: 15px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background: linear-gradient(90deg, #4a581b, #184522);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.4s;
+  }
+  
+  /* Efek hover tombol */
+  .menu button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #43e97b, #38f9d7);
+  }
+  

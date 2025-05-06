@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Materi PPKI</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #b19215;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+    }
+    .card {
+      width: 220px;
+      height: 160px;
+      margin: 10px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    .card-front {
+      background-color: #ffffff;
+      color: #2d3436;
+    }
+    .card-back {
+      background-color: #74b9ff;
+      color: white;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const cards = [
+  { soal: "Apa kepanjangan dari PPKI?", jawaban: "Panitia Persiapan Kemerdekaan Indonesia" },
+      { soal: "Siapa ketua PPKI?", jawaban: "Ir. Soekarno" },
+      { soal: "Kapan PPKI dibentuk?", jawaban: "7 Agustus 1945" },
+      { soal: "Apa tujuan utama dibentuknya PPKI?", jawaban: "Untuk mempersiapkan kemerdekaan Indonesia." },
+      { soal: "PPKI dibentuk oleh siapa?", jawaban: "Jepang (oleh Jenderal Terauchi)" },
+      { soal: "Kapan PPKI mengadakan sidang pertamanya?", jawaban: "18 Agustus 1945" },
+      { soal: "Apa hasil utama dari sidang pertama PPKI?", jawaban: "Mengangkat Soekarno sebagai Presiden dan Mohammad Hatta sebagai Wakil Presiden, serta mengesahkan UUD 1945" },
+      { soal: "Berapa jumlah anggota awal PPKI?", jawaban: "21 orang" },
+      { soal: "Apa perbedaan PPKI dan BPUPKI?", jawaban: "BPUPKI bertugas menyusun dasar negara, sedangkan PPKI bertugas mempersiapkan kemerdekaan" },
+      { soal: "Siapa tokoh muda yang mendesak agar kemerdekaan segera diproklamasikan, walaupun tidak termasuk anggota PPKI?", jawaban: "Sutan Sjahrir" },
+  ];
+
+  cards.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-inner">
+        <div class="card-front">${item.soal}</div>
+        <div class="card-back">${item.jawaban}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+    document.body.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

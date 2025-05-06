@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Materi Panitia 9</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #b19215;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+    }
+    .card {
+      width: 220px;
+      height: 160px;
+      margin: 10px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    .card-front {
+      background-color: #ffffff;
+      color: #2d3436;
+    }
+    .card-back {
+      background-color: #74b9ff;
+      color: white;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const cards = [
+      { soal: "Apa itu Panitia 9?", jawaban: "Panitia kecil yang dibentuk BPUPKI untuk merumuskan dasar negara Indonesia" },
+      { soal: "Kapan Panitia 9 dibentuk?", jawaban: "1 Juni 1945" },
+      { soal: "Siapa ketua Panitia 9?", jawaban: "Ir. Soekarno" },
+      { soal: "Berapa jumlah anggota Panitia 9?", jawaban: "9 orang" },
+      { soal: "Apa hasil penting dari Panitia 9?", jawaban: "Piagam Jakarta (Jakarta Charter)" },
+      { soal: "Siapa tokoh Islam dalam Panitia 9?", jawaban: "H. Agus Salim, Abikoesno Tjokrosoejoso, K.H. Wahid Hasyim, dan Abdul Kahar Muzakir" },
+      { soal: "Apa tujuan utama dibentuknya Panitia 9?", jawaban: "Merumuskan dasar negara dan pembukaan UUD" },
+      { soal: "Apa isi utama Piagam Jakarta?", jawaban: "Rumusan dasar negara Indonesia, termasuk sila-sila awal Pancasila" },
+      { soal: "Mengapa Piagam Jakarta mengalami perubahan?", jawaban: "Untuk mengakomodasi keberagaman agama, terutama terkait tujuh kata dalam sila pertama" },
+      { soal: "Siapa yang menggantikan tujuh kata dalam Piagam Jakarta?", jawaban: "Disepakati oleh tokoh-tokoh nasional termasuk Mohammad Hatta, dengan persetujuan tokoh Islam" },
+  ];
+
+  cards.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-inner">
+        <div class="card-front">${item.soal}</div>
+        <div class="card-back">${item.jawaban}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+    document.body.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

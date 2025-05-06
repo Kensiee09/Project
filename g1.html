@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Memory Match BPUPKI - 20 Soal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: #b19215;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      color: #222;
+    }
+
+    h1.judul {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #000000;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Container for cards */
+    #game-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 1080px;
+      width: 100%;
+    }
+
+    /* Card styles */
+    .card {
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      box-sizing: border-box;
+      font-size: 14px;
+      width: 240px;
+      height: 100px;
+      color: #222;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      /* Smooth fade for text */
+      overflow-wrap: break-word;
+      line-height: 1.2;
+    }
+
+    .card.revealed {
+      background: #74b9ff;
+      color: white;
+      cursor: default;
+    }
+
+    .card.matched {
+      background: #55efc4;
+      color: white;
+      cursor: default;
+    }
+
+    /* back button style */
+    #backButton {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #0984e3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    
+    }
+
+    #backButton:hover {
+      background-color: #74b9ff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .card {
+        width: 90vw;
+        height: auto;
+        min-height: 90px;
+        font-size: 16px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="judul">Permainan Memory Card Sejarah</h1>
+  <div id="game-container"></div>
+  <button id="backButton">Kembali</button>
+
+  <script>
+    const pairs = [
+      { soal: "Apa kepanjangan dari BPUPKI?", jawaban: "Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia" },
+      { soal: "Kapan BPUPKI dibentuk?", jawaban: "29 April 1945" },
+      { soal: "Siapa ketua BPUPKI?", jawaban: "Dr. Radjiman Wedyodiningrat" },
+      { soal: "Apa tujuan utama dibentuknya BPUPKI?", jawaban: "Untuk mempersiapkan kemerdekaan Indonesia" },
+      { soal: "Berapa jumlah anggota BPUPKI?", jawaban: "74 orang (67 Indonesia, 7 Jepang)" },
+      { soal: "Kapan sidang pertama BPUPKI dilaksanakan?", jawaban: "29 Mei – 1 Juni 1945" },
+      { soal: "Apa yang dibahas dalam sidang pertama BPUPKI?", jawaban: "Dasar negara Indonesia" },
+      { soal: "Kapan sidang kedua BPUPKI dilaksanakan?", jawaban: "10 – 17 Juli 1945" },
+      { soal: "Apa hasil dari sidang kedua BPUPKI?", jawaban: "Rancangan Undang-Undang Dasar (UUD)" },
+      { soal: "Siapa tiga tokoh yang mengusulkan dasar negara dalam sidang pertama?", jawaban: "Muhammad Yamin, Soepomo, dan Ir. Soekarno" },
+      { soal: "Siapa tokoh yang menyampaikan pidato tentang Pancasila pada 1 Juni 1945?", jawaban: "Ir. Soekarno" },
+      { soal: "Apa nama panitia kecil yang dibentuk oleh BPUPKI untuk merumuskan dasar negara?", jawaban: "Panitia Sembilan" },
+      { soal: "Apa hasil dari Panitia Sembilan?", jawaban: "Piagam Jakarta" },
+      { soal: "Kapan Piagam Jakarta dirumuskan?", jawaban: "22 Juni 1945" },
+      { soal: "Apa isi dari Piagam Jakarta?", jawaban: "Rancangan pembukaan UUD 1945" },
+      { soal: "Apa peran Jepang dalam pembentukan BPUPKI?", jawaban: "Untuk menarik simpati rakyat Indonesia dengan menjanjikan kemerdekaan" },
+      { soal: "Apa perbedaan BPUPKI dan PPKI?", jawaban: "BPUPKI menyusun dasar kemerdekaan, PPKI memproklamasikan kemerdekaan" },
+      { soal: "Siapa anggota Panitia Sembilan?", jawaban: "Ir. Soekarno, Mohammad Hatta, A.A. Maramis, K.H. Wahid Hasyim, dll" },
+      { soal: "Apa nama sidang lanjutan setelah BPUPKI dibubarkan?", jawaban: "PPKI (Panitia Persiapan Kemerdekaan Indonesia)" },
+      { soal: "Kapan BPUPKI dibubarkan?", jawaban: "7 Agustus 1945" }
+    ];
+
+    // Gabungkan soal dan jawaban ke dalam satu array kartu
+    let cards = [];
+    pairs.forEach((pair, index) => {
+      cards.push({ text: pair.soal, id: index, type: 'soal' });
+      cards.push({ text: pair.jawaban, id: index, type: 'jawaban' });
+    });
+
+    // Fungsi untuk mengacak array (Fisher-Yates)
+    function shuffle(array) {
+      let currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+    // State variables
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false;
+
+    const gameContainer = document.getElementById('game-container');
+
+    function initGame() {
+      // Reset game state
+      firstCard = null;
+      secondCard = null;
+      lockBoard = false;
+
+      // Clear previous cards
+      gameContainer.innerHTML = '';
+
+      // Shuffle cards before display
+      const shuffledCards = shuffle(cards.slice());
+
+      // Create and add card elements
+      shuffledCards.forEach(cardData => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.textContent = '';
+        card.dataset.id = cardData.id;
+        card.dataset.type = cardData.type;
+        card.dataset.text = cardData.text;
+
+        card.addEventListener('click', function() {
+          if (lockBoard || card.classList.contains('matched') || card.classList.contains('revealed')) return;
+
+          card.classList.add('revealed');
+          card.textContent = cardData.text;
+
+          if (!firstCard) {
+            firstCard = card;
+          } else {
+            secondCard = card;
+            lockBoard = true;
+
+            if (firstCard.dataset.id === secondCard.dataset.id && firstCard.dataset.type !== secondCard.dataset.type) {
+              firstCard.classList.add('matched');
+              secondCard.classList.add('matched');
+              resetBoard();
+
+              // Check game end condition
+              if (document.querySelectorAll('.card.matched').length === cards.length) {
+                setTimeout(() => {
+                  alert('Selamat! Anda telah berhasil mencocokkan semua kartu.');
+                }, 300);
+              }
+            } else {
+              setTimeout(() => {
+                firstCard.classList.remove('revealed');
+                secondCard.classList.remove('revealed');
+                firstCard.textContent = '';
+                secondCard.textContent = '';
+                resetBoard();
+              }, 1000);
+            }
+          }
+        });
+
+        gameContainer.appendChild(card);
+      });
+    }
+
+function resetBoard() {
+  [firstCard, secondCard, lockBoard] = [null, null, false];
+}
+
+// 
+document.getElementById('backButton').addEventListener('click', () => {
+  history.back(); // Kembali ke halaman sebelumnya
+});
+
+// Initialize game on load
+initGame();
+</script>
+</body>
+</html>
+
+
+
+
+```
+
