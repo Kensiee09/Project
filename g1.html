@@ -132,13 +132,20 @@
       { soal: "Apa nama sidang lanjutan setelah BPUPKI dibubarkan?", jawaban: "PPKI (Panitia Persiapan Kemerdekaan Indonesia)" },
       { soal: "Kapan BPUPKI dibubarkan?", jawaban: "7 Agustus 1945" }
     ];
+    
+    // Pilih 6 pasangan soal-jawaban secara acak
+function getRandomPairs(pairs, count) {
+  const shuffled = shuffle(pairs.slice());
+  return shuffled.slice(0, count);
+}
 
-    // Gabungkan soal dan jawaban ke dalam satu array kartu
-    let cards = [];
-    pairs.forEach((pair, index) => {
-      cards.push({ text: pair.soal, id: index, type: 'soal' });
-      cards.push({ text: pair.jawaban, id: index, type: 'jawaban' });
-    });
+const selectedPairs = getRandomPairs(pairs, 6); // Ambil 6 pasang
+let cards = [];
+selectedPairs.forEach((pair, index) => {
+  cards.push({ text: pair.soal, id: index, type: 'soal' });
+  cards.push({ text: pair.jawaban, id: index, type: 'jawaban' });
+});
+
 
     // Fungsi untuk mengacak array (Fisher-Yates)
     function shuffle(array) {
